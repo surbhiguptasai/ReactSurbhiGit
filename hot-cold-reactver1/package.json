@@ -2,12 +2,15 @@
   "name": "hot-cold-reactver1",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+ "devDependencies": {
+    "enzyme": "^2.8.2",
+    "react-scripts": "0.8.5",
+    "react-test-renderer": "^15.5.4"
   },
-  "devDependencies": {
-    "react-scripts": "1.0.7"
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-scripts": "1.0.7",
+    "enzyme": "^2.8.2"
   },
   "scripts": {
     "start": "react-scripts start",

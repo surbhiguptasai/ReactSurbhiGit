@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Heading = React.createClass({
+export default class Heading extends React.Component{
   render() {
     return <h1>HOT or COLD</h1>;
   }
-});
+};
 
-export default Heading;

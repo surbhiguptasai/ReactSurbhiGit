@@ -1,6 +1,7 @@
 import React from 'react';
 
 const GuessForm = React.createClass({
+	
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>

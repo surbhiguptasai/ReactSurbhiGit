@@ -6,13 +6,24 @@ export default class GuessSection extends React.Component{
 
  constructor(props) {
     super(props);
-    this.state = {value: 0,userFeedback:'Make your guess!',
-      secretNumber:Math.floor(Math.random()*100)+1};
+    this.state = {
+      value: 0,
+      userFeedback:'Make your guess!',
+      secretNumber:Math.floor(Math.random()*100)+1,
+      pastGuesses:[]
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     }
+
+  addEntryToArray(entry){
+let pastGuess=this.state.pastGuesses;
+pastGuess.push(entry);
+this.setState({pastGuesses: pastGuess});
+    }
+
  
     handleChange(event) {
       console.log("handle change");
@@ -24,8 +35,9 @@ export default class GuessSection extends React.Component{
     event.preventDefault();
     this.refs.form.input.value = '';
     this.generateFeedback();
-    this.refs.child.incrementCount();
-    this.refs.list.addEntryToArray(this.state.value);
+    this.addEntryToArray(this.state.value);
+ 
+    
     console.log("handle guess"+this.state.value);
   }
 
@@ -42,7 +54,7 @@ winner(){
   } else if(Math.abs(this.state.secretNumber - this.state.value) < 10){
     this.state.userFeedback = 'hot';
   } else if(Math.abs(this.state.secretNumber - this.state.value) < 20 && Math.abs(this.state.secretNumber - this.state.value) > 9){
-    this.state.userFeedback = ' Kinda hot';
+    this.state.userFeedback = 'Kinda hot';
   } else if(Math.abs(this.state.secretNumber - this.state.value) < 30 && Math.abs(this.state.secretNumber - this.state.value) > 19){
     this.state.userFeedback = 'less than warm';
   } else {
@@ -59,8 +71,8 @@ winner(){
          { /* Guessing Section */ }
         <h2 id="feedback">{this.state.userFeedback}</h2>
         <GuessForm  ref="form" handleChange={this.handleChange} handleSubmit={this.handleSubmit}></GuessForm>
-        <GuessCount ref="child"></GuessCount>
-        <GuessList ref="list"></GuessList>
+        <GuessCount count={this.state.pastGuesses.length}></GuessCount>
+        <GuessList array1={this.state.pastGuesses}></GuessList>
       </section>
       );
   }
